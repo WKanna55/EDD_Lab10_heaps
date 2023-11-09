@@ -1,7 +1,5 @@
-"""Implementacion de heaps (inicio)"""
-
-
-class Heap:  # Max Heap
+"""Ejercicio 01: Implementacion de un heap(maxheap) (inicio)"""
+class MaxHeap:  # Max Heap
     def __init__(self) -> None:
         self.items = []
         self.size = 0
@@ -50,6 +48,12 @@ class Heap:  # Max Heap
     def parent(self, index):  # Get index parent
         return (index - 1) // 2
 
+    def parent_value(self, child_index):
+        if child_index >= self.size:
+            raise Exception("Indice invalido")
+        parent_index = self.parent(child_index)
+        return self.items[parent_index]
+
     def left_child(self, index):  # return left child value
         return self.items[self.left_child_index(index)]
 
@@ -82,15 +86,22 @@ class Heap:  # Max Heap
         else:
             return self.right_child_index(index)
 
+    def print_heap(self):
+        return self.print_heap_(0)
+    def print_heap_(self, padre, nivel = 0):
+        if padre < self.size:
+            self.print_heap_(self.left_child_index(padre), nivel + 1)
+            print((nivel * 4 * "-") + str(self.items[padre]))
+            self.print_heap_(self.right_child_index(padre), nivel + 1)
 
-"""Implementacion de heaps (fin)"""
 
+"""Ejercicio 01: Implementacion de un heap(maxheap) (fin)"""
 """Implementacion heapsort(inicio)"""
 
 
 # complejidad de tiempo O(n(log(n)))
 
-class HeapSort(Heap):
+class MaxHeapSort(MaxHeap):
     def __init__(self):
         super().__init__()
 
@@ -108,7 +119,7 @@ class HeapSort(Heap):
 """Implementacion heapsort(fin)"""
 
 # Max Heap
-heap = Heap()
+heap = MaxHeap()
 heap.insert(30)
 heap.insert(20)
 heap.insert(10)
@@ -116,15 +127,46 @@ heap.insert(5)
 print(heap.items)
 heap.insert(40)
 print(heap.items)
-heap.remove()
+heap.insert(7)
+heap.insert(3)
 print(heap.items)
 
-ordenamiento = HeapSort()
+"""Ejercicio 02: retornar padre (inicio)"""
+#print(heap.parent_value(5))
+"""Ejercicio 02: retornar padre (fin)"""
 
-print("\n\n")
+"""Ejercicio 03: imprimir heap (inicio)"""
+#heap.print_heap()
+"""Ejercicio 03: imprimir heap (fin)"""
 
-array = [6,4,8,12,25,14,3,19]
-print(array)
-array_ordenado = ordenamiento.ordenar(array)
+"""Ejercicio 04: Implementacion de una cola de prioridad con heap maximo (inicio)"""
+class Element_Queue:
+    def __init__(self, priority, value):
+        self.priority = priority
+        self.value = value
+    def __str__(self):
+        return str(f"Prioridad: {self.priority} valor: {self.value}")
+class Priority_Queue(MaxHeap):
+    def __init__(self):
+        super().__init__()
 
-print(array_ordenado)
+    def insert(self, value):
+        pass   
+
+"""Ejercicio 04: Implementacion de una cola de prioridad con heap maximo (fin)"""
+
+"""Ejercicio 05: Heapify (inicio)"""
+"""Ejercicio 05: Heapify (fin)"""
+
+"""Ejercicio 06: Encontrar el Elemento k-esimo mas pequeño o grande (inicio)"""
+"""Ejercicio 06: Encontrar el Elemento k-esimo mas pequeño o grande (fin)"""
+
+"""Ejercicio 07: maxheap (inicio)"""
+"""Ejercicio 07: maxheap (fin)"""
+
+"""Ejercicio 08: minheap con nodos (inicio)"""
+"""Ejercicio 08: minheap con nodos (fin)"""
+
+"""Ejercicio 09: Min priority queue (inicio)"""
+"""Ejercicio 09: Min priority queue (fin)"""
+
